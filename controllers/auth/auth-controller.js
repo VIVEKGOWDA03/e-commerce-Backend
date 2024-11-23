@@ -6,6 +6,7 @@ const User = require("../../models/User");
 // Register User
 const registerUser = async (req, res) => {
   const { userName, email, password } = req.body;
+console.log("req.body",req.body);
 
   // Validate input
   if (!userName || !email || !password) {
@@ -59,7 +60,7 @@ const loginUser = async (req, res) => {
   try {
     const checkUser = await User.findOne({ email });
     if (!checkUser) {
-      return res.status(400).json({
+      return res.json({
         success: false,
         message: "User doesn't exist! Please register first.",
       });
@@ -70,7 +71,7 @@ const loginUser = async (req, res) => {
       checkUser.password
     );
     if (!checkPasswordMatch) {
-      return res.status(400).json({
+      return res.json({
         success: false,
         message: "Incorrect Password",
       });
@@ -92,7 +93,7 @@ const loginUser = async (req, res) => {
       user: {
         email: checkUser.email,
         role: checkUser.role,
-        id: checkUser.id,
+        id: checkUser._id,
       },
     });
   } catch (e) {
@@ -106,7 +107,7 @@ const loginUser = async (req, res) => {
 
 // logout
 const logoutUser = (req, res) => {
-  res.cookie("token").json({
+  res.clearCookie("token").json({
     success: true,
     message: "logged out",
   });
