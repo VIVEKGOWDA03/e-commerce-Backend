@@ -6,7 +6,7 @@ const User = require("../../models/User");
 // Register User
 const registerUser = async (req, res) => {
   const { userName, email, password } = req.body;
-console.log("req.body",req.body);
+  console.log("req.body", req.body);
 
   // Validate input
   if (!userName || !email || !password) {
@@ -82,6 +82,7 @@ const loginUser = async (req, res) => {
         id: checkUser._id,
         role: checkUser.role,
         email: checkUser.email,
+        userName: checkUser.userName,
       },
       "CLIENT_SECRET_KEY",
       { expiresIn: "60m" }
@@ -94,6 +95,7 @@ const loginUser = async (req, res) => {
         email: checkUser.email,
         role: checkUser.role,
         id: checkUser._id,
+        userName: checkUser.userName,
       },
     });
   } catch (e) {
