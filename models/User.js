@@ -18,15 +18,10 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: "admin",
+    default: "user",
   },
 });
 
-// Create partial index for userName field to allow nulls but enforce uniqueness for non-null values
-// UserSchema.index(
-//   { userName: 1 },
-//   { partialFilterExpression: { userName: { $ne: null } } }
-// );
 
 const User = mongoose.model("User", UserSchema);
 

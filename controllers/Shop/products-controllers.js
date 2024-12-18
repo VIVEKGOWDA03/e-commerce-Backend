@@ -5,7 +5,7 @@ const getFilteredProducts = async (req, res) => {
     const { Category, Brand, sortBy = "price-lowtohigh" } = req.query;
     let filters = {};
 
-    console.log("Received query parameters:", req.query);
+    // console.log("Received query parameters:", req.query);
 
     // Check if Category is provided and filter by category
     if (Category) {
@@ -56,7 +56,7 @@ const getFilteredProducts = async (req, res) => {
 
 const getProductDetails = async (req, res) => {
   try {
-    const {} = req.params;
+    const {id} = req.params;
     const product = await Product.findById(id);
     if (!product)
       return res.status(404).json({

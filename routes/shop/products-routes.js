@@ -7,5 +7,5 @@ const {
 
 const routes = express.Router();
 routes.get("/get", getFilteredProducts);
-routes.get("get/:id", getProductDetails);
+routes.get("/get/:id", getProductDetails);
 module.exports = routes;
