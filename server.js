@@ -10,6 +10,7 @@ const shopProductsRouter = require("./routes/shop/products-routes");
 const shopCartRouter = require("./routes/shop/cart-routes");
 const shopAddressRouter = require("./routes/shop/address-routes");
 const shopOrderRouter = require("./routes/shop/order-routes");
+const shopSearchRouter = require("./routes/shop/search-route");
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -44,6 +45,8 @@ app.use("/api/shop/products", shopProductsRouter);
 app.use("/api/shop/cart", shopCartRouter);
 app.use("/api/shop/address", shopAddressRouter);
 app.use("/api/shop/order", shopOrderRouter);
+app.use("/api/shop/search", shopSearchRouter);
+
 app.listen(PORT, () => console.log(`server is running on Port ${PORT}`));
 
 // const express = require("express");
@@ -73,7 +76,7 @@ app.listen(PORT, () => console.log(`server is running on Port ${PORT}`));
 //   cors({
 //     origin: [
 //       "http://localhost:5173",  // React local development
-//       "http://192.168.0.100:5173"  // Local network IP for mobile testing
+//       "http://192.168.64.144:5173/"  // Local network IP for mobile testing
 //     ],
 //     methods: ["GET", "POST", "DELETE", "PUT"],
 //     allowedHeaders: [
