@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { SiTrueup } = require("react-icons/si");
 
 const FeatureSchema = new mongoose.Schema(
   {
