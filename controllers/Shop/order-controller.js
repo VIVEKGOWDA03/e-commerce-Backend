@@ -32,12 +32,8 @@ const createOrder = async (req, res) => {
         payment_method: "paypal",
       },
       redirect_urls: {
-        // return_url: "http://localhost:5173/shop/paypal-return",
-        // cancel_url: "http://localhost:5173/shop/paypal-cancel",
-        return_url:
-          "https://7ce2-2409-40f4-100e-a860-41a6-3e3e-6b55-3de1.ngrok-free.app/api/shop/paypal-return",
-        cancel_url:
-          "https://7ce2-2409-40f4-100e-a860-41a6-3e3e-6b55-3de1.ngrok-free.app/api/shop/paypal-cancel",
+        return_url: `${process.env.CLIENT_BASE_URL}/shop/paypal-return`,
+        cancel_url: `${process.env.CLIENT_BASE_URL}/shop/paypal-cancel`,
       },
       transactions: [
         {
