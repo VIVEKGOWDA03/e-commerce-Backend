@@ -7,18 +7,21 @@ const addProductReview = async (req, res) => {
     const { productId, userId, userName, reviewMessage, reviewValue } =
       req.body;
 
+    // Temporarily commented out the order check logic
+    /*
     const order = await Order.findOne({
       userId,
       "cartItems.productId": productId,
       orderStatus: "confirmed",
     });
-    // console.log(order)
     if (!order) {
       return res.status(403).json({
         success: false,
-        message: "You need to purchase this product  to review it .",
+        message: "You need to purchase this product to review it.",
       });
     }
+    */
+
     const CheckExistingReview = await productReview.findOne({
       productId,
       userId,
@@ -26,7 +29,7 @@ const addProductReview = async (req, res) => {
     if (CheckExistingReview) {
       return res.status(400).json({
         success: false,
-        message: "you have already added a review for this product",
+        message: "You have already added a review for this product.",
       });
     }
 
@@ -38,13 +41,15 @@ const addProductReview = async (req, res) => {
       reviewValue,
     });
     await newReview.save();
+
     const reviews = await productReview.find({ productId });
-    const totalReviewsLenght = reviews.length;
+    const totalReviewsLength = reviews.length;
     const averageReview =
       reviews.reduce((sum, reviewItem) => sum + reviewItem.reviewValue, 0) /
-      totalReviewsLenght;
+      totalReviewsLength;
 
     await Product.findByIdAndUpdate(productId, { averageReview });
+
     res.status(201).json({
       success: true,
       data: newReview,
@@ -53,7 +58,7 @@ const addProductReview = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "error",
+      message: "Error adding review",
     });
   }
 };
@@ -70,7 +75,7 @@ const getProductReview = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "error",
+      message: "Error retrieving reviews",
     });
   }
 };
