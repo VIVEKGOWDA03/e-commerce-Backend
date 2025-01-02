@@ -22,9 +22,23 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
+// app.use(
+//   cors({
+//     origin: process.env.CLIENT_BASE_URL,
+//     methods: ["GET", "POST", "DELETE", "PUT"],
+//     allowedHeaders: [
+//       "Content-Type",
+//       "Authorization",
+//       "Cache-control",
+//       "Expires",
+//       "Pragma",
+//     ],
+//     credentials: true,
+//   })
+// );
 app.use(
   cors({
-    origin: process.env.CLIENT_BASE_URL,
+    origin: "*", // Allow all domains and IP addresses
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
@@ -33,7 +47,7 @@ app.use(
       "Expires",
       "Pragma",
     ],
-    credentials: true,
+    credentials: true, // Optional, if you need to allow cookies to be sent with requests
   })
 );
 
